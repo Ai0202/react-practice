@@ -1,34 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-class SearchForm extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      place: '鋸山'
-    }
-  }
-  
-  handlePlaceChange(place) {
-    this.setState({place})
-  }
+const SearchForm = props => (
+  <form onSubmit={e => props.onSubmit(e)}>
+    <input
+      type="text"
+      value={props.place}
+      onChange={e => props.onPlaceChange(e.target.value)}
+    />
+    <button type="submit">検索</button>
+  </form>
+)
 
-  handleSubmit(e) {
-    e.preventDefault();
-    this.props.onSubmit(this.state.place);
-  }
-
-  render() {
-    return (
-      <form onSubmit={e => this.handleSubmit(e)}>
-        <input
-          type="text"
-          value={this.state.place}
-          onChange={e => this.handlePlaceChange(e.target.value)}
-        />
-        <button type="submit">検索</button>
-      </form>
-    )
-  }
+SearchForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  place: PropTypes.string.isRequired,
+  onPlaceChange: PropTypes.func.isRequired,
 }
 
 export default SearchForm
