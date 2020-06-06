@@ -2,7 +2,7 @@ import { getDistance } from 'geolib';
 
 import Rakuten from '../lib/Rakuten';
 
-const RAKUTEN_APP_ID = '';
+const RAKUTEN_APP_ID = '1044611485623665851';
 
 export const searchHotelByLocation = (location) => {
   const params = {

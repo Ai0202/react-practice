@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const GEOCODE_ENDPOINT = 'https://maps.googleapis.com/maps/api/geocode/json';
-const GEOCODE_API_KEY = '';
+const GEOCODE_API_KEY = process.env.REACT_APP_GEOCODE_API_KEY;
 
 export const geocode = place => 
   axios
@@ -10,8 +10,8 @@ export const geocode = place =>
       const data = results.data;
       const status = data.status;
       const result = data.results[0];
-
-      if (typeof results === 'undefined') {
+      
+      if (typeof result === 'undefined') {
         return { status };
       }
 

@@ -15,7 +15,7 @@ GeocodeResult.prototype = {
 };
 
 GeocodeResult.defaultProps = {
-  address: 'フラット1',
+  address: '',
 };
 
 export default GeocodeResult;

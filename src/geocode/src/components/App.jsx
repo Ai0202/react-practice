@@ -19,6 +19,7 @@ const App = () => (
           <Link to="/about">About</Link>
         </li>
       </ul>
+      {/* Routerの中のSwitchで囲まれた部分が切り替わるview */}
       <Switch>
         <Route exact path="/" component={SearchPage} />
         <Route exact path="/about" component={AboutPage} />
