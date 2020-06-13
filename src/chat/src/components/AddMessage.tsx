@@ -5,15 +5,15 @@ type Props = {
 }
 
 export const AddMessage: React.FC<Props> = props => {
-  let input: any
+  let input: HTMLInputElement | null
 
   return (
     <section id="new-message">
       <input
        onKeyPress={(e) => {
          if (e.key === "Enter") {
-           props.submit(input.value, '私')
-           input.value = ''
+           props.submit(input!.value, '私')
+           input!.value = ''
          }
        }}
        type="text"

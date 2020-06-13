@@ -4,7 +4,7 @@ import { addMessage as action } from "../actions";
 import { Dispatch } from "redux";
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  submit: (message: string, author: string) => dispatch(action(message, author))
+  submit: (message: string, author: string) => dispatch(action({ data: { message, author } }))
 })
 
 export default connect(() => ({}), mapDispatchToProps)(AddMessage)

@@ -12,6 +12,7 @@ import { handleNewMessage } from "./sagas";
 import { username } from "./utils/name";
 
 import { setUpSocket } from "./sockets";
+import { Action } from "./actions";
 
 const SagaMiddleware = createSagaMiddleware()
 

@@ -16,7 +16,7 @@ export const setUpSocket = (dispatch: Dispatch, username: string) => {
     const data = JSON.parse(event.data)
     switch (data.type) {
       case types.ADD_MESSAGE:
-        dispatch(messageRecived(data.message, data.author))
+        dispatch(messageRecived({ data: { message: data.message, author: data.author } }))
         break;
       case types.ADD_USER:
         dispatch(addUser(data.name))
