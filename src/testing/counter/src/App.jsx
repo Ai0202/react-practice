@@ -11,6 +11,16 @@ class App extends Component {
     }
   }
 
+  decrementCounter = ()  => {
+
+    if (this.state.counter <= 0) {
+      document.querySelector('.error-display').textContent = 'エラーです';
+    } else {
+      this.setState({ counter: this.state.counter - 1 })
+    }
+
+  }
+
   render() {
     return (
       // id や class属性が存在するかテストで判断可能だが、
@@ -20,6 +30,7 @@ class App extends Component {
         <h1 data-test="counter-display">
           The coutner is currently { this.state.counter }
         </h1>
+        <div className="error-display" data-test="error-display"></div>
         <button 
           data-test="increment-button"
           onClick={() => this.setState({ counter: this.state.counter + 1 })}
@@ -28,7 +39,7 @@ class App extends Component {
         </button>
         <button 
           data-test="decrement-button"
-          onClick={() => this.setState({ counter: this.state.counter - 1 })}
+          onClick={() => this.decrementCounter()}
         >
           Decrement Counter
         </button>

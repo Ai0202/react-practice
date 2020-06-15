@@ -89,3 +89,24 @@ test('clicking button decrements counter display', () => {
   const counterDisplay = findByTestAttr(wrapper, 'counter-display');
   expect(counterDisplay.text()).toContain(counter - 1);
 });
+
+test('show error when decrement under zero', () => {
+  const counter = 0;
+  const wrapper = setup(null, { counter });
+
+  const button = findByTestAttr(wrapper, 'decrement-button');
+  button.simulate('click');
+
+  // エラーが表示されるか確認
+  const errorDisplay = findByTestAttr(wrapper, 'error-display');
+  expect(errorDisplay.text()).toBe('エラーです');
+
+});
+
+// TODO not yet done
+test('disappear the error text when click increment button', () => {
+  const wrapper = setup();
+
+  const button = findByTestAttr(wrapper, 'increment-button');
+  button.simulate('click');
+});
