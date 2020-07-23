@@ -1,6 +1,7 @@
 import { db, auth, FirebaseTimestamp } from '../../firebase/index';
 import { isValidEmailFormat, isValidRequiredInput } from "../../functions/common";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
+import { signInAction } from "../users/actions";
 import { push, goBack } from 'connected-react-router'
 
 const usersRef = db.collection('users')
@@ -54,6 +55,57 @@ export const signUp = (username, email, password, confirmPassword) => {
         dispatch(hideLoadingAction())
         alert('アカウント登録に失敗しました。もう1度お試しください。')
         throw new Error(error)        
+      })
+  }
+}
+
+export const signIn = (email, password) => {
+  return async (dispatch) => {
+    dispatch(showLoadingAction("Sign in..."))
+
+    if (!isValidRequiredInput(email, password)) {
+      dispatch(hideLoadingAction());
+      alert('メールアドレスかパスワードが未入力です。')
+      return false
+    }
+
+    if (!isValidEmailFormat(email)) {
+      dispatch(hideLoadingAction());
+      alert('メールアドレスの形式が不正です。')
+      return false
+    }
+
+    return auth.signInWithEmailAndPassword(email, password)
+      .then(res => {
+        const userState = res.user
+
+        if (!userState) {
+          dispatch(hideLoadingAction());
+          throw new Error('ユーザーIDを取得できません')
+        }
+        const userId = userState.uid
+
+        return usersRef.doc(userId).get().then(snapshot => {
+          const data = snapshot.data()
+
+          if (!data) {
+            dispatch(hideLoadingAction())
+            throw new Error('ユーザーデータが存在しません')
+          }
+
+          dispatch(signInAction({
+            isSignedIn: true,
+            role: data.role,
+            uid: userId,
+            username: data.username,
+          }))
+
+          dispatch(hideLoadingAction())
+          dispatch(push('/'))
+        })
+      }).catch((e) => {
+        console.log(e)
+        dispatch(hideLoadingAction())
       })
   }
 }

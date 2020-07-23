@@ -72,7 +72,7 @@ const SignUp = () => {
         onChange={inputConfirmPassword}
       />
       <div className="module-spacer--medium" />
-      <div class="center">
+      <div className="center">
         <PrimaryButton  
           label={"アカウントを登録する"}
           onClick={() => dispatch(signUp(username, email, password, confirmPassword))}
