@@ -1,0 +1,21 @@
+[debug] [2020-07-23T06:36:42.041Z] ----------------------------------------------------------------------
+[debug] [2020-07-23T06:36:42.043Z] Command:       /Users/atsushi/.anyenv/envs/nodenv/versions/13.3.0/bin/node /Users/atsushi/.anyenv/envs/nodenv/versions/13.3.0/bin/firebase init
+[debug] [2020-07-23T06:36:42.044Z] CLI Version:   8.4.1
+[debug] [2020-07-23T06:36:42.044Z] Platform:      darwin
+[debug] [2020-07-23T06:36:42.044Z] Node Version:  v13.3.0
+[debug] [2020-07-23T06:36:42.048Z] Time:          Thu Jul 23 2020 15:36:42 GMT+0900 (Japan Standard Time)
+[debug] [2020-07-23T06:36:42.048Z] ----------------------------------------------------------------------
+[debug] [2020-07-23T06:36:42.048Z] 
+[debug] [2020-07-23T06:36:42.060Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-07-23T06:36:42.061Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/atsushi/projects/personal/tutorials/react/src/sample-ec
+
