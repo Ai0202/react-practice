@@ -1,7 +1,8 @@
 import React, { useState, useCallback } from "react";
 import { TextInput, PrimaryButton } from "../components/UIkit";
 import { useDispatch } from "react-redux";
-import { signIn } from "../reducks/users/operations";
+import { signIn, resetPassword } from "../reducks/users/operations";
+import { push } from "connected-react-router"
 
 const SignIn = () => {
   const dispatch = useDispatch()
@@ -47,6 +48,11 @@ const SignIn = () => {
           label={"サインイン"}
           onClick={() => { dispatch(signIn(email, password))}}
         />
+      </div>
+      <div className="module-spacer--medium" />
+      <div className="center">
+        <p className="u-text-small" onClick={() => dispatch(push('/resetpassword'))}>パスワードを忘れた方はこちら</p>
+        <p className="u-text-small" onClick={() => dispatch(push('/signup'))}>アカウント登録がまだの方はこちら</p>
       </div>
     </div>
   )

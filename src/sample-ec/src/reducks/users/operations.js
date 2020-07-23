@@ -1,7 +1,7 @@
 import { db, auth, FirebaseTimestamp } from '../../firebase/index';
 import { isValidEmailFormat, isValidRequiredInput } from "../../functions/common";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
-import { signInAction } from "../users/actions";
+import { signInAction, signOutAction } from "../users/actions";
 import { push, goBack } from 'connected-react-router'
 
 const usersRef = db.collection('users')
@@ -107,5 +107,68 @@ export const signIn = (email, password) => {
         console.log(e)
         dispatch(hideLoadingAction())
       })
+  }
+}
+
+export const listenAuthState = () => {
+  return async (dispatch) => {
+    return auth.onAuthStateChanged(user => {
+      if (user) {
+        usersRef.doc(user.uid).get().then(snapshot => {
+          const data = snapshot.data()
+
+          if (!data) {
+            dispatch(hideLoadingAction())
+            throw new Error('ユーザーデータが存在しません')
+          }
+
+          dispatch(signInAction({
+            isSignedIn: true,
+            role: data.role,
+            uid: user.uid,
+            username: data.username,
+          }))
+
+          dispatch(push('/'))
+        })
+      } else {
+        dispatch(push('/signin'))
+      }
+    })
+  }
+}
+
+export const signOut = () => {
+  return async (dispatch) => {
+    auth.signOut()
+      .then(() => {
+        dispatch(signOutAction())
+        dispatch(push('/'))
+      })
+  }
+}
+
+export const resetPassword = email => {
+  return async dispatch => {
+    if (!isValidRequiredInput(email)) {
+      alert('必須項目が未入力です。')
+      return false
+    }
+
+    if (!isValidEmailFormat(email)) {
+      dispatch(hideLoadingAction());
+      alert('メールアドレスの形式が不正です。')
+      return false
+    }
+
+    return auth.sendPasswordResetEmail(email)
+      .then(() => {
+        alert('入力されたアドレス宛にパスワードリセットのメールをお送りしましたのでご確認ください。')
+        dispatch(push('/signin'))
+      }).catch(() => {
+        alert('登録されていないメールアドレスです。もう一度ご確認ください。')
+        dispatch(push('/signin'))
+      })
+
   }
 }
