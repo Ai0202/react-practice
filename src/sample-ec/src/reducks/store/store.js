@@ -7,8 +7,9 @@ import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk';
 import { connectRouter, routerMiddleware } from 'connected-react-router'
 
-import { LoadingReducer } from '../loading/reducers';
-import { UsersReducer } from '../users/reducers';
+import { LoadingReducer } from '../loading/reducers'
+import { UsersReducer } from '../users/reducers'
+import { ProductsReducer } from '../products/reducers'
 
 // createStoreの再定義 - historyを引数で受け、connected-react-routerの利用を抽象化
 export default function createStore(history) {
@@ -25,6 +26,7 @@ export default function createStore(history) {
     combineReducers({
       loading: LoadingReducer,
       users: UsersReducer,
+      products: ProductsReducer,
       router: connectRouter(history),
     }),
     applyMiddleware(...middleWares)  
