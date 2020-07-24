@@ -4,6 +4,7 @@ import {
   SignUp, 
   SignIn,
   ResetPassword,
+  ProductEdit,
   ProductList } from "./templates"
 import Auth from "./Auth"
 
@@ -16,6 +17,7 @@ const Router = () => {
 
       <Auth>
         <Route exact path="/" component={ProductList} />
+        <Route exact path="/products/edit" component={ProductEdit} />
       </Auth>
     </Switch>
   )
