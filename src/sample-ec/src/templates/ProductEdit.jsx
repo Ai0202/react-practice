@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import { TextInput, SelectBox, PrimaryButton } from '../components/UIkit'
-import { ImageArea } from '../components/Products'
+import { ImageArea, SetSizesArea } from '../components/Products'
 import { useDispatch } from 'react-redux'
 import { saveProduct } from '../reducks/products/operations'
 import { db } from '../firebase'
@@ -25,7 +25,8 @@ const ProductEdit = () => {
         [category, setCategory] = useState(""),
         [categories, setCategories] = useState([]),
         [gender, setGender] = useState(""),
-        [price, setPrice] = useState("")
+        [price, setPrice] = useState(""),
+        [sizes, setSizes] = useState([])
 
   useEffect(() => {
     if (id !== "") {
@@ -38,6 +39,7 @@ const ProductEdit = () => {
         setCategory(product.category)
         setGender(product.gender)
         setPrice(product.price)
+        // setSizes(product.sizes)
       })
     }
   }, [id])
@@ -114,11 +116,15 @@ const ProductEdit = () => {
           value={price}
           type={"number"}
         />
+        <SetSizesArea 
+          sizes={sizes}
+          setSizes={setSizes}
+        />
         <div className="module-spacer--small" />
         <div className="center">
           <PrimaryButton
             label={"商品情報を保存"}
-            onClick={() => dispatch(saveProduct(name, description, category, gender, price, images))}
+            onClick={() => dispatch(saveProduct(name, description, category, gender, price, images, sizes))}
           />
         </div>
       </div>
