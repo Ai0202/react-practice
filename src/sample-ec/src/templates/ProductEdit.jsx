@@ -3,10 +3,15 @@ import { TextInput, SelectBox, PrimaryButton } from '../components/UIkit'
 import { ImageArea } from '../components/Products'
 import { useDispatch } from 'react-redux'
 import { saveProduct } from '../reducks/products/operations'
+import { db } from '../firebase'
 
 
 const ProductEdit = () => {
   const dispatch = useDispatch()
+  let id = window.location.pathname.split('/products/edit')[1]
+  if (id !== "") {
+    id = id.split('/')[1]
+  }
 
   const genders = [
     { id: "all", name: "すべて" },
@@ -21,6 +26,21 @@ const ProductEdit = () => {
         [categories, setCategories] = useState([]),
         [gender, setGender] = useState(""),
         [price, setPrice] = useState("")
+
+  useEffect(() => {
+    if (id !== "") {
+      db.collection('products').doc(id).get().then(snapshot => {
+        const product = snapshot.data()
+        console.log(product)
+        setName(product.name)
+        setDescription(product.description)
+        setImages(product.images)
+        setCategory(product.category)
+        setGender(product.gender)
+        setPrice(product.price)
+      })
+    }
+  }, [id])
 
   const inputName = useCallback(e => {
     setName(e.target.value)
@@ -98,7 +118,7 @@ const ProductEdit = () => {
         <div className="center">
           <PrimaryButton
             label={"商品情報を保存"}
-            onClick={() => dispatch(saveProduct(name, description, category, gender, price))}
+            onClick={() => dispatch(saveProduct(name, description, category, gender, price, images))}
           />
         </div>
       </div>

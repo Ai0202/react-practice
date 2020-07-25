@@ -17,7 +17,7 @@ const Router = () => {
 
       <Auth>
         <Route exact path="/" component={ProductList} />
-        <Route exact path="/products/edit" component={ProductEdit} />
+        <Route path="/products/edit(/:id)?" component={ProductEdit} />
       </Auth>
     </Switch>
   )
