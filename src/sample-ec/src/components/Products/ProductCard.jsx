@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { push } from 'connected-react-router'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
@@ -11,6 +11,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import NoImage from '../../assets/img/src/no_image.png'
+import { deleteProduct } from '../../reducks/products/operations'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,6 +66,16 @@ const ProductCard = props => {
   const classes = useStyles()
   const images = (props.images.length > 0) ? props.images : [{ path: NoImage }]
   const price = props.price.toLocaleString()
+  const dispatch = useDispatch()
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = e => {
+    setAnchorEl(e.currentTarget)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
 
   return (
     <Card className={classes.root}>
@@ -82,6 +93,35 @@ const ProductCard = props => {
             ￥{price}
           </Typography>
         </div>
+        <>
+          <IconButton className={classes.icon} onClick={handleClick} color="inherit">
+            <MoreVertIcon />
+          </IconButton>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem
+              onClick={() => {
+                dispatch(push(`/products/edit/${props.id}`))
+                handleClose()
+              }}
+            >
+              編集する
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                dispatch(deleteProduct(props.id))
+                handleClose()
+              }}
+            >
+              削除する
+            </MenuItem>
+          </Menu>
+        </>
       </CardContent>
     </Card>
   )
