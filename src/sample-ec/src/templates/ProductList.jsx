@@ -1,13 +1,42 @@
-import React from "react"
-import { useDispatch } from "react-redux";
-import { signOut } from "../reducks/users/operations";
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { signOut } from "../reducks/users/operations"
+import { ProductCard } from "../components/Products"
+import { fetchProducts } from "../reducks/products/operations"
+import { getProducts } from "../reducks/products/selectors"
 
 const ProductList = () => {
   const dispatch = useDispatch()
+  const selector = useSelector(state => state)
+  const products = getProducts(selector)
+
+  useEffect(() => {
+    dispatch(fetchProducts())
+  }, [])
+
   return (
-    <div className="center">
-      <button onClick={() => dispatch(signOut())}>サインアウト</button>
-    </div>
+    <>
+      <section className="c-section-wrapin">
+        <div className="p-grid__row">
+          {products.length > 0 && (
+            products.map(product => {
+              return (
+                <ProductCard 
+                  key={product.id}
+                  id={product.id} 
+                  images={product.images}
+                  price={product.price} 
+                  name={product.name}
+                />
+              )
+            })
+          )}
+        </div>
+      </section>
+      <div className="center">
+        <button onClick={() => dispatch(signOut())}>サインアウト</button>
+      </div>
+    </>
   )
 }
 

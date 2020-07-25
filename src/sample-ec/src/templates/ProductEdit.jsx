@@ -39,7 +39,7 @@ const ProductEdit = () => {
         setCategory(product.category)
         setGender(product.gender)
         setPrice(product.price)
-        // setSizes(product.sizes)
+        setSizes(product.sizes)
       })
     }
   }, [id])

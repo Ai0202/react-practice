@@ -68,6 +68,11 @@ const SetSizesArea = (props) => {
     props.setSizes(newSizes);
   }
 
+  const memoIndex = useMemo(() => {
+    setIndex(props.sizes.length)
+  }, [props.sizes.length])
+
+
   return (
     <div aria-label="サイズ展開">
       <TableContainer component={Paper}>

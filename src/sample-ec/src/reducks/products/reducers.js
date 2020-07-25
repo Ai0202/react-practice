@@ -11,7 +11,7 @@ export const ProductsReducer = (state = initialState.products, action) => {
     case Actions.FETCH_PRODUCTS:
       return {
         ...state,
-        list: action.payload
+        list: [...action.payload]
       };
     case Actions.INIT_PRODUCTS:
       return {
