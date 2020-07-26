@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Swiper from 'react-id-swiper'
 import NoImage from '../../assets/img/src/no_image.png'
-import 'swiper/css/swiper.css'
+// import 'swiper/css/swiper.css'
 
 const ImageSwiper = props => {
   const [params] = React.useState({
