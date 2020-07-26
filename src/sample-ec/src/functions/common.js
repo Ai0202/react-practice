@@ -1,3 +1,5 @@
+import HTMLReactParser from 'html-react-parser'
+
 /**
  * Validate input email
  * @param email
@@ -23,3 +25,10 @@ export const isValidRequiredInput = (...args) => {
   }
   return validator
 };
+
+
+export const returnCodeToBr = str => {
+  if (str === "") return str
+
+  return HTMLReactParser(str.replace(/\r?\n/g, '<br/>'))
+}

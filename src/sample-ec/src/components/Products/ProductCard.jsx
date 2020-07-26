@@ -34,7 +34,9 @@ const useStyles = makeStyles((theme) => ({
   },
   icon: {
     marginRight: 0,
-    marginLeft: 'auto'
+    marginLeft: 'auto',
+    height: 48,
+    width: 48,
   },
   media: {
     height: 0,
@@ -83,6 +85,7 @@ const ProductCard = props => {
         className={classes.media}
         image={images[0].path}
         title=""
+        onClick={() => dispatch(push(`/products/${props.id}`))}
       />
       <CardContent className={classes.content}>
         <div>

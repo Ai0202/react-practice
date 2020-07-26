@@ -170,3 +170,13 @@ export const resetPassword = email => {
 
   }
 }
+
+export const addProductToCart = addedProduct => {
+  return async (dispatch, getState) => {
+    const uid = getState().users.uid
+    const cartRef = usersRef.doc(uid).collection('cart').doc()
+    addedProduct['cartId'] = cartRef.id
+    await cartRef.set(addedProduct)
+    dispatch(push('/cart'))
+  }
+}
