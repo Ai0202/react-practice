@@ -33,6 +33,13 @@ const useStyles = makeStyles(() =>
 const Header = () => {
   const classes = useStyles()
   const dispatch = useDispatch()
+  const [sideBarOpen, setSideBarOpen] = useState(false)
+
+  const handleDrawerToggle = useCallback(e => {
+    if (e.type === 'keydown' && (e.key === 'Tab' || e.key === 'Shift')) return
+    
+    setSideBarOpen(!sideBarOpen);
+  }, [setSideBarOpen, sideBarOpen])
 
   return (
     <div className={classes.root}>
@@ -50,6 +57,7 @@ const Header = () => {
               aria-label="Menu Items"
               aria-controls="menu-appbar"
               aria-haspopup="true"
+              onClick={e => handleDrawerToggle(e)}
               color="inherit"
             >
               <MenuIcon />
@@ -57,6 +65,7 @@ const Header = () => {
           </div>
         </Toolbar>
       </AppBar>
+      <ClosableDrawer open={sideBarOpen} onClose={handleDrawerToggle} />
     </div>
   )
 }
