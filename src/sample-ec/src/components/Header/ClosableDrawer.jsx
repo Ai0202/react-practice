@@ -80,7 +80,10 @@ const ClosableDrawer = ({ open, onClose, container }) => {
           keepMounted: true,
         }}
       >
-        <div>
+        <div
+          onClose={e => onClose(e)}
+          onKeyDown={e => onClose(e)}
+        >
           <div className={classes.searchField}>
             <TextInput 
               fullWidth={false} 

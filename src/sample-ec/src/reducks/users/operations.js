@@ -1,7 +1,7 @@
 import { db, auth, FirebaseTimestamp } from '../../firebase/index';
 import { isValidEmailFormat, isValidRequiredInput } from "../../functions/common";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
-import { signInAction, signOutAction } from "../users/actions";
+import { signInAction, signOutAction, fetchProductsInCartAction } from "../users/actions";
 import { push, goBack } from 'connected-react-router'
 
 const usersRef = db.collection('users')
@@ -177,6 +177,12 @@ export const addProductToCart = addedProduct => {
     const cartRef = usersRef.doc(uid).collection('cart').doc()
     addedProduct['cartId'] = cartRef.id
     await cartRef.set(addedProduct)
-    dispatch(push('/cart'))
+    dispatch(push('/'))
   }
 }
+
+export const fetchProductsInCart = products => {
+  return async (dispatch) => {
+    dispatch(fetchProductsInCartAction(products))
+  }
+} 
