@@ -1,6 +1,7 @@
 import { db, FirebaseTimestamp } from "../../firebase"
 import { push } from "connected-react-router"
 import { fetchProductsAction, deleteProductAction } from "./actions"
+import { hideLoadingAction, showLoadingAction } from "../loading/actions";
 
 const productsRef = db.collection('products')
 
@@ -58,5 +59,21 @@ export const deleteProduct = id => {
         const nextProducts = prevProducts.filter(product => product.id !== id)
         dispatch(deleteProductAction(nextProducts))
       })
+  }
+}
+
+export const orderProduct = productsInCart => {
+  return async (dispatch, getState) => {
+    dispatch(showLoadingAction("決済処理中..."))
+
+    const uid = getState().users.uid
+    const userRef = db.collection('users').doc(uid)
+    const timestamp = FirebaseTimestamp.now()
+    let amount = 0;
+    let products = {}
+
+    for (const product of productsInCart) {
+      
+    }
   }
 }

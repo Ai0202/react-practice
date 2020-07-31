@@ -27,9 +27,15 @@ const useStyles = makeStyles((theme) => ({
 
 const CartListItem = ({ product }) => {
   const classes = useStyles()
+  const selector = useSelector(state => state)
 
   const image = product.images[0]?.path
   const price = product.price.toLocaleString()
+
+  const removeProductFromCart = id => {
+    const uid = getUserId(selector)
+    return db.collection('users').doc(uid).collection('cart').doc(id).delete()
+  }
 
   return (
     <>
@@ -41,7 +47,7 @@ const CartListItem = ({ product }) => {
           <ListItemText primary={product.name} secondary={"サイズ：" + product.size} />
           <ListItemText primary={"¥" + price} />
         </div>
-        <IconButton onClick={() => {}} >
+        <IconButton onClick={() => removeProductFromCart(product.cartId)} >
           <DeleteIcon />
         </IconButton>
       </ListItem>

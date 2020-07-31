@@ -185,4 +185,4 @@ export const fetchProductsInCart = products => {
   return async (dispatch) => {
     dispatch(fetchProductsInCartAction(products))
   }
-} 
+}
