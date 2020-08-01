@@ -181,6 +181,13 @@ export const addProductToCart = addedProduct => {
   }
 }
 
+// export const deleteProductToCart = deletedProduct => {
+//   return async (dispatch, getState) => {
+//     const uid = getState().users.uid
+//     db.collection('users').doc(uid).collection('cart').doc(id).delete()
+//   }
+// }
+
 export const fetchProductsInCart = products => {
   return async (dispatch) => {
     dispatch(fetchProductsInCartAction(products))

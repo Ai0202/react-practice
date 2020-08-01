@@ -44,7 +44,7 @@ const OrderConfirm = () => {
   const total = subtotal + shippingFee + tax
 
   const order = useCallback(() => {
-    dispatch(orderProduct(productsInCart))
+    dispatch(orderProduct(productsInCart, total))
   }, [productsInCart])
 
   return (
