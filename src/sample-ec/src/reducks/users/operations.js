@@ -1,7 +1,7 @@
 import { db, auth, FirebaseTimestamp } from '../../firebase/index';
 import { isValidEmailFormat, isValidRequiredInput } from "../../functions/common";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
-import { signInAction, signOutAction, fetchProductsInCartAction } from "../users/actions";
+import { signInAction, signOutAction, fetchProductsInCartAction, fetchOrdersHistoryAction } from "../users/actions";
 import { push, goBack } from 'connected-react-router'
 
 const usersRef = db.collection('users')
@@ -191,5 +191,22 @@ export const addProductToCart = addedProduct => {
 export const fetchProductsInCart = products => {
   return async (dispatch) => {
     dispatch(fetchProductsInCartAction(products))
+  }
+}
+
+export const fetchOrdersHistory = () => {
+  return async (dispatch, getState) => {
+    const uid = getState().users.uid
+    const list = []
+
+    usersRef.doc(uid).collection('orders')
+      .orderBy('updated_at', 'desc').get()
+      .then(snapshots => {
+        snapshots.forEach(snapshot => {
+          const data = snapshot.data()
+          list.push(data)
+        })
+        dispatch(fetchOrdersHistoryAction(list))
+      })
   }
 }
