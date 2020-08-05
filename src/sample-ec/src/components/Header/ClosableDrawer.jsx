@@ -16,6 +16,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle'
 import HistoryIcon from '@material-ui/icons/History'
 import PersonIcon from '@material-ui/icons/Person'
 import { push } from 'connected-react-router'
+import { db } from '../../firebase'
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -53,6 +54,19 @@ const ClosableDrawer = ({ open, onClose, container }) => {
     { func: selectMenu, label: "メンズ", id: "male", value: "?gender=male" },
     { func: selectMenu, label: "レディース", id: "female", value: "?gender=female" },
   ])
+
+  useEffect(() => {
+    db.collection('categories').orderBy("order", "asc").get()
+      .then(snapshots => {
+        const list = []
+        snapshots.forEach(snapshot => {
+          console.log(list)
+          const category = snapshot.data()
+          list.push({ func: selectMenu, label: category.name, id: category.id, value: `/?category=${category.id}` })
+        })
+        setFilters(prevState => [...prevState, ...list])
+      })
+  }, [])
 
   const inputSearchKeyword = useCallback(e => {
     setSearchKeyword(e.target.value)

@@ -4,6 +4,7 @@ import { ImageArea, SetSizesArea } from '../components/Products'
 import { useDispatch } from 'react-redux'
 import { saveProduct } from '../reducks/products/operations'
 import { db } from '../firebase'
+import { lightGreen } from '@material-ui/core/colors'
 
 
 const ProductEdit = () => {
@@ -57,12 +58,15 @@ const ProductEdit = () => {
   }, [setPrice])
 
   useEffect(() => {
-    const list = [
-      {id: 1, name: 'シャツ'},
-      {id: 2, name: 'パンツ'},
-      {id: 3, name: 'アウター'},
-    ]
-    setCategories(list)
+    const list = [];
+    db.collection('categories').orderBy("order", "asc").get()
+      .then(snapshots => {
+        snapshots.forEach(snapshot => {
+          const category = snapshot.data()
+          list.push(category)
+        })
+        setCategories(list)
+      })
   }, [])
          
   return (
