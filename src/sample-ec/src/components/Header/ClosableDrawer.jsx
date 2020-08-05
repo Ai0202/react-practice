@@ -60,7 +60,6 @@ const ClosableDrawer = ({ open, onClose, container }) => {
       .then(snapshots => {
         const list = []
         snapshots.forEach(snapshot => {
-          console.log(list)
           const category = snapshot.data()
           list.push({ func: selectMenu, label: category.name, id: category.id, value: `/?category=${category.id}` })
         })
