@@ -74,7 +74,6 @@ const ProductCard = props => {
   const selector = useSelector(state => state)
   const userRole = getUserRole(selector)
   const isAdmin = userRole === "admin"
-  console.log(isAdmin)
 
   const handleClick = e => {
     setAnchorEl(e.currentTarget)

@@ -10,6 +10,7 @@ export const initialState = {
     cart: [],
     isSignedIn: false,
     orders: [],
+    favorite: [],
     role: "",
     uid: "",
     username: ""

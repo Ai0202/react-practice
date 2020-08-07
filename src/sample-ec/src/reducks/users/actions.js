@@ -22,6 +22,14 @@ export const fetchProductsInCartAction = (products) => {
   }
 }
 
+export const FETCH_FAVORITE_PRODUCTS = "FETCH_FAVORITE_PRODUCTS";
+export const fetchFavoriteProductsAction = products => {
+  return {
+    type: FETCH_FAVORITE_PRODUCTS,
+    payload: products
+  }
+}
+
 export const SIGN_IN = "SIGN_IN";
 export const signInAction = (userState) => {
   return {

@@ -27,3 +27,7 @@ export const getUserRole = createSelector(
   state => state.role
 );
 
+export const getFavoriteProducts = createSelector(
+  [usersSelector],
+  state => state.favorite
+)

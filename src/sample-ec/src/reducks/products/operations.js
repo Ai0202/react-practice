@@ -35,7 +35,7 @@ export const saveProduct = (id, name, description, category, gender, price, imag
   }
 }
 
-export const fetchProducts = (gender, category) => {
+export const fetchProducts = (gender = "", category = "") => {
   return async (dispatch) => {
     let query = productsRef.orderBy('updated_at', 'desc')
     query = (gender !== "") ? query.where('gender', '==', gender) : query

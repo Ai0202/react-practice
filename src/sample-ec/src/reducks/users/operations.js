@@ -1,7 +1,11 @@
 import { db, auth, FirebaseTimestamp } from '../../firebase/index';
 import { isValidEmailFormat, isValidRequiredInput } from "../../functions/common";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
-import { signInAction, signOutAction, fetchProductsInCartAction, fetchOrdersHistoryAction } from "../users/actions";
+import { signInAction, 
+  signOutAction, 
+  fetchProductsInCartAction, 
+  fetchOrdersHistoryAction,
+  fetchFavoriteProductsAction } from "../users/actions";
 import { push, goBack } from 'connected-react-router'
 
 const usersRef = db.collection('users')
@@ -215,7 +219,22 @@ export const addProductToFavorite = favoriteProduct => {
   return async (dispatch, getState) => {
     const uid = getState().users.uid
     const cartRef = usersRef.doc(uid).collection('favorite').doc(favoriteProduct.productId)
-    favoriteProduct['favoriteId'] = cartRef.id
     await cartRef.set(favoriteProduct)
+  }
+}
+
+export const fetchFavoriteProducts = () => {
+  return async (dispatch, getState) => {
+    const uid = getState().users.uid
+    usersRef.doc(uid).collection('favorite').orderBy("added_at", "desc")
+      .get()
+      .then(snapshots => {
+        const productList = []
+        snapshots.forEach(snapshot => {
+          const product = snapshot.data()
+          productList.push(product)
+        })
+        dispatch(fetchFavoriteProductsAction(productList))
+      })
   }
 }
