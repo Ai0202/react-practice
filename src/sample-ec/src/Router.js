@@ -10,7 +10,8 @@ import {
   ProductDetail,
   OrderConfirm,
   OrderComplete,
-  OrderHistory} from "./templates"
+  OrderHistory,
+  FavoriteProducts} from "./templates"
 import Auth from "./Auth"
 
 const Router = () => {
@@ -28,6 +29,7 @@ const Router = () => {
         <Route exact path="/orders/history" component={OrderHistory} />
         <Route exact path="/products/:id" component={ProductDetail} />
         <Route path="/products/edit(/:id)?" component={ProductEdit} />
+        <Route path="/favorite" component={FavoriteProducts} />
       </Auth>
     </Switch>
   )

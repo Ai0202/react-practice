@@ -52,7 +52,7 @@ const HeaderMenu = () => {
           <ShoppingCartIcon />
         </Badge>
       </IconButton>
-      <IconButton>
+      <IconButton onClick={() => dispatch(push('/favorite'))}>
         <FavoriteBorderIcon />
       </IconButton>
     </>
