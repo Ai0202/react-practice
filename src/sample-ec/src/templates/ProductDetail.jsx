@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/styles'
 import { returnCodeToBr } from '../functions/common'
 import { SizeTable } from '../components/Products'
-import { addProductToCart } from '../reducks/users/operations'
+import { addProductToCart, addProductToFavorite } from '../reducks/users/operations'
 import ImageSwiper from '../components/Products/ImageSwiper'
 
 const useStyles = makeStyles((theme) => ({
@@ -67,7 +67,20 @@ const ProductDetail = () => {
       quantity: 1,
       size: selectedSize
     }))
-  }, [product]) 
+  }, [product])
+
+  const addFavorite = useCallback(() => {
+    const timestamp = FirebaseTimestamp.now()
+    dispatch(addProductToFavorite({
+      added_at: timestamp,
+      description: product.description,
+      gender: product.gender,
+      images: product.images,
+      name: product.name,
+      price: product.price,
+      productId: product.id,
+    }))
+  }, [product])
 
   return (
     <section className="c-section-wrapin">
@@ -82,7 +95,7 @@ const ProductDetail = () => {
               ￥{(product.price).toLocaleString()}
             </p>
             <div className="module-spacer--small" />
-            <SizeTable addProduct={addProduct} sizes={product.sizes} />
+            <SizeTable addProduct={addProduct} addFavorite={addFavorite} sizes={product.sizes} />
             <div className="module-spacer--small" />
             <p>{returnCodeToBr(product.description)}</p>
           </div>

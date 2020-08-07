@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   }
 })
 
-const SizeTable = ({ addProduct, sizes }) => {
+const SizeTable = ({ addProduct, addFavorite, sizes }) => {
   const classes = useStyles()
 
   return (
@@ -42,7 +42,10 @@ const SizeTable = ({ addProduct, sizes }) => {
                       )}
                   </TableCell>
                   <TableCell className={classes.iconCell}>
-                    <IconButton className={classes.iconCell}>
+                    <IconButton 
+                      className={classes.iconCell}
+                      onClick={() => addFavorite()}
+                    >
                       <FavoriteBorderIcon />
                     </IconButton>
                   </TableCell>

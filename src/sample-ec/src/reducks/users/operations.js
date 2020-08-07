@@ -210,3 +210,12 @@ export const fetchOrdersHistory = () => {
       })
   }
 }
+
+export const addProductToFavorite = favoriteProduct => {
+  return async (dispatch, getState) => {
+    const uid = getState().users.uid
+    const cartRef = usersRef.doc(uid).collection('favorite').doc(favoriteProduct.productId)
+    favoriteProduct['favoriteId'] = cartRef.id
+    await cartRef.set(favoriteProduct)
+  }
+}
