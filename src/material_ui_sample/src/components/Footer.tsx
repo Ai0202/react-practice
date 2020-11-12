@@ -30,21 +30,19 @@ export const Footer = () => {
   return (
       <Typography className={classes.root} component="footer">
         <Grid container justify="space-between" alignItems="center">
-          <Grid item sm={8}>
+          <Grid item md={6}>
             <Typography variant="h6">
               Emoiロゴ
             </Typography>
           </Grid>
-          <Grid item sm={4}>
-            <Typography className={classes.list} component="ul">
-              <Typography component="li" variant="subtitle1">
-                <Link className={classes.link} to="/teams">利用規約</Link>
-              </Typography>
-              <Typography component="li" variant="subtitle1">
-                <Link className={classes.link} to="/privacy">プライバシーポリシー</Link>
-              </Typography>
+          <Typography className={classes.list} component="ul">
+            <Typography component="li" variant="subtitle1">
+              <Link className={classes.link} to="/terms">利用規約</Link>
             </Typography>
-          </Grid>
+            <Typography component="li" variant="subtitle1">
+              <Link className={classes.link} to="/privacy">プライバシーポリシー</Link>
+            </Typography>
+          </Typography>
         </Grid>
       </Typography>
   )
