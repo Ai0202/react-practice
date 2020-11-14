@@ -3,7 +3,7 @@ import { Grid, Typography, Box } from '@material-ui/core'
 
 export const Menu: FC = () => {
   return (
-    <Box mb={3}>
+    <Box mb={1}>
       <Grid container>
         <Grid item xs={2}>
           <Typography color="primary" variant="subtitle1">

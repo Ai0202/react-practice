@@ -14,7 +14,7 @@ export const Sample3: FC = () => {
   
   return (
     <>
-      <Title title="メンターを探す" />
+      <Title title="マイページ" />
       <Menu />
       <Profile />
       {/* <Grid container spacing={5} >
