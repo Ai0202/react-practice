@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     link: {
       textDecoration: "none",
-      color: theme.palette.grey[600]
+      color: "inherit"
     },
   }),
 );

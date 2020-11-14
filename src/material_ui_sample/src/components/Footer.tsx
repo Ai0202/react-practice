@@ -32,7 +32,7 @@ export const Footer = () => {
         <Grid container justify="space-between" alignItems="center">
           <Grid item md={6}>
             <Typography variant="h6">
-              Emoiロゴ
+              Emoi
             </Typography>
           </Grid>
           <Typography className={classes.list} component="ul">
