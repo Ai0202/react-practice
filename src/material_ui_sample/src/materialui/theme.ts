@@ -14,6 +14,10 @@ export const theme = createMuiTheme({
       dark: '#c66900',
       contrastText: '#ffffff',
     },
+    background: {
+      default: '#f5f5f5',
+    },
+    
   },
   // spacing: [0, 2, 4, 8, 16, 32, 64],
 })

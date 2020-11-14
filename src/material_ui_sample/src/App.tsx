@@ -3,27 +3,18 @@ import React from 'react';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import { Router } from './Router';
-import { makeStyles, Theme, createStyles } from '@material-ui/core'
+import { theme } from './materialui/theme';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    bg: {
-      backgroundColor: theme.palette.background.default
-    }
-  })
-)
 
 function App() {
-  const classes = useStyles();
-
   return (
-    <Container className={classes.bg} maxWidth={false}>
+    <Box pt={10} pb={2} component="main" bgcolor={theme.palette.background.default}>
       <Container maxWidth="lg">
         <Box py={3}>
           <Router />
         </Box>
       </Container>
-    </Container>
+    </Box>
   );
 }
 

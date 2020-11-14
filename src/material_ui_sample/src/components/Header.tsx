@@ -26,9 +26,6 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       flexGrow: 1,
     },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
     title: {
       flexGrow: 1,
     },
@@ -44,8 +41,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const Header: FC = () => {
   const classes = useStyles();
-
   const [isOpen, setIsOpen] = useState(false)
+  let isLogin = true;
 
   const toggleDrawer = (isOpen: boolean) => (event: React.KeyboardEvent | React.MouseEvent,) => {
     if (
@@ -101,21 +98,28 @@ export const Header: FC = () => {
 
   return (
     <div className={classes.root}>
-      {/* '"inherit" | "transparent" | "default" | "primary" | "secondary" | undefined'. */}
-      <AppBar position="static" color="secondary">
+      <AppBar position="fixed" color="inherit" elevation={1}>
         <Toolbar>
-          <IconButton onClick={toggleDrawer(true)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
           <Drawer open={isOpen} onClose={toggleDrawer(false)}>
             {list()}
           </Drawer>
           <Typography variant="h6" className={classes.title}>
-            News
+            Emoi
           </Typography>
-          <Link to="/signin" className={classes.link}>
-            <Button color="inherit">Login</Button>
-          </Link>
+          <Button color="inherit">
+            {isLogin ? 
+              <Link to="/signin" className={classes.link}>
+                ログアウト
+              </Link>
+              :
+              <Link to="/signin" className={classes.link}>
+                ログイン
+              </Link>      
+          }
+            </Button>
+          <IconButton onClick={toggleDrawer(true)} color="inherit" aria-label="menu">
+            <MenuIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
     </div>
