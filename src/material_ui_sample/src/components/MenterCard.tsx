@@ -86,12 +86,12 @@ export const MenterCard: FC<Props> = ({name, url}) => {
                     あなたに会う服を、稀代のモテ男の私が選ぶ。 これであなたもモテ男になること間違いなし
                   </Link>
                 </Typography>
-                <Grid container>
+                {/* <Grid container>
                   <Grid container item>
                     <Typography variant="body2">評価</Typography>
                     <Rating name="evaluation" value={1} readOnly size="small" />
                   </Grid>
-                </Grid>
+                </Grid> */}
               </Grid>
             </Grid>
           </Grid>
