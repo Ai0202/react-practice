@@ -8,11 +8,9 @@ import { theme } from './materialui/theme';
 
 function App() {
   return (
-    <Box pt={10} pb={2} component="main" bgcolor={theme.palette.background.default}>
+    <Box pt={12} pb={4} component="main" bgcolor={theme.palette.background.default}>
       <Container maxWidth="lg">
-        <Box py={3}>
-          <Router />
-        </Box>
+        <Router />
       </Container>
     </Box>
   );
