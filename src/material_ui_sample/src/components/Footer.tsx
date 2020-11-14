@@ -6,10 +6,12 @@ import { Link } from 'react-router-dom'
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      // flexGrow: 1,
-      // backgroundColor: theme.palette.background.paper,
-      // backgroundColor: '#ddd',
-      padding: theme.spacing(3),
+      backgroundColor: theme.palette.background.paper,
+      paddingTop: theme.spacing(2),
+      paddingRight: theme.spacing(3),
+      paddingBottom: theme.spacing(2),
+      paddingLeft: theme.spacing(3),
+      maxHeight: 64
     },
     link: {
       textDecoration: "none",
