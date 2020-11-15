@@ -24,13 +24,6 @@ export const MenterDetail: FC = () => {
       <SubTitle title="自己紹介" />
       <MenterProfile />
 
-      <SubTitle title="メッセージ" />
-      <Paper>
-        <Typography>
-          メッセージ
-        </Typography>
-      </Paper>
-
       {/* <SubTitle title="口コミ" />
       <Paper>
         <Typography>
